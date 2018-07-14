@@ -8,7 +8,7 @@ class BookShelves extends Component {
         <div className="bookshelf">
             <h2 className="bookshelf-title">{this.props.shelf}</h2>
             <div className="bookshelf-books">
-            <Books booksArr={this.props.booksArr} shelf={this.props.shelf} />
+            <Books shelfChanger={this.props.shelfChanger} booksArr={this.props.booksArr} shelf={this.props.shelf} />
             </div>
         </div>
 

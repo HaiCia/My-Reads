@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 
 class Books extends Component {
-    render() {
-    
+  
+  //  <p>{console.log(this.state.currentShelf)}</p>
+
+  render() {
+      let currentShelf = this.props.booksArr.filter((book) => this.props.shelf === book.shelf).map((book) => book.shelf)
+
+      
         return (
             <ol className="books-grid">
+            <p>{console.log(currentShelf)}</p>
             {this.props.booksArr
                 .filter((book) => this.props.shelf === book.shelf)
                 .map((book) => (
@@ -13,12 +19,12 @@ class Books extends Component {
                     <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.coverURL})`}}></div>
                     <div className="book-shelf-changer">
-                        <select>
+                        <select onChange={(e) => this.props.shelfChanger(book, e.target.value)}>
                         <option value="move" disabled>Move to...</option>
-                        <option value="currentlyReading">Currently Reading</option>
-                        <option value="wantToRead">Want to Read</option>
-                        <option value="read">Read</option>
-                        <option value="none">None</option>
+                        <option value="Currently Reading">Currently Reading</option>
+                        <option value="Want to Read">Want to Read</option>
+                        <option value="Read">Read</option>
+                        <option value="None">None</option>
                         </select>
                     </div>
                     </div>

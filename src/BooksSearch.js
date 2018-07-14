@@ -2,9 +2,11 @@ import React from 'react'
 
 
 class BooksSearch extends React.Component {
+  state = {
+    showSearchPage: false
+  }
+
     render() {
-
-
         return (
             <div className="search-books">
                 <div className="search-books-bar">

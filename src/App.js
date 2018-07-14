@@ -3,6 +3,7 @@ import React from 'react'
 import './App.css'
 import BooksSearch from './BooksSearch'
 import BookShelves from './BooksShelves'
+import * as BooksAPI from './BooksAPI'
 
 // jezeli komponent ma tylko render() mozemy uzyc za to zwyklerj funkcji i props podajemy jako pierwszy argument lesson3 state managment film 1
   
@@ -15,6 +16,7 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
+    
     booksArr: [
       {
         "id": "To Kill a Mockingbird",
@@ -45,17 +47,30 @@ class BooksApp extends React.Component {
         "shelf": "Read"
       }
       ],
-    showSearchPage: false
+    
   }
+
+  shelfChanger = (book, shelf) => {
+    BooksAPI.update(book, shelf).then((response) => {
+      book.shelf = shelf
+
+      var updatedBooks = this.state.booksArr.filter((item)=> book.id !== item.id)
+
+      updatedBooks.push(book)
+      this.setState({ booksArr: updatedBooks})
+    })
+  }
+  
+  
 
   render() {
     return (
 
       <div className="app">
         <BooksSearch />
-        <BookShelves booksArr={this.state.booksArr} shelf='Currently Reading' />
-        <BookShelves booksArr={this.state.booksArr} shelf='Want to Read' />
-        <BookShelves booksArr={this.state.booksArr} shelf='Read' /> 
+        <BookShelves shelfChanger={this.shelfChanger} booksArr={this.state.booksArr} shelf="Currently Reading" />
+        <BookShelves shelfChanger={this.shelfChanger} booksArr={this.state.booksArr} shelf="Want to Read" />
+        <BookShelves shelfChanger={this.shelfChanger} booksArr={this.state.booksArr} shelf="Read" /> 
         
         </div>
 
