@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class Books extends Component {
   
-  //  <p>{console.log(this.state.currentShelf)}</p>
 
   render() {
-      let currentShelf = this.props.booksArr.filter((book) => this.props.shelf === book.shelf).map((book) => book.shelf)
+      let selectedShelf = "move"
 
       
         return (
             <ol className="books-grid">
-            <p>{console.log(currentShelf)}</p>
+            {console.log(this.props.booksArr)}
             {this.props.booksArr
                 .filter((book) => this.props.shelf === book.shelf)
                 .map((book) => (
@@ -19,8 +19,8 @@ class Books extends Component {
                     <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.coverURL})`}}></div>
                     <div className="book-shelf-changer">
-                        <select onChange={(e) => this.props.shelfChanger(book, e.target.value)}>
-                        <option value="move" disabled>Move to...</option>
+                        <select defaultValue={selectedShelf} onChange={(e) => this.props.shelfChanger(book, e.target.value)}>
+                        <option value="move" disabled >Move to...</option>
                         <option value="Currently Reading">Currently Reading</option>
                         <option value="Want to Read">Want to Read</option>
                         <option value="Read">Read</option>
@@ -37,6 +37,11 @@ class Books extends Component {
         </ol>)
     }
 
+}
+
+Books.propTypes = {
+  booksArr: PropTypes.array.isRequired, 
+  shelf: PropTypes.string,
 }
 
 export default Books
