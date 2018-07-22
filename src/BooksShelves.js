@@ -6,6 +6,7 @@ function BooksShelves(props) {
 
   const { booksArr, shelf, shelfChanger } = props
   let updatedBooksArr = booksArr.filter((book) => shelf === book.shelf)
+
   return (
     <div className="bookshelf">
       <h2 className="bookshelf-title">{shelf.charAt(0).toUpperCase() + shelf.slice(1).replace(/([A-Z])/g, " $1")}</h2>
@@ -15,8 +16,6 @@ function BooksShelves(props) {
     </div>
     )
   }
-
-
 
 BooksShelves.propTypes = {
     shelf: PropTypes.string.isRequired,

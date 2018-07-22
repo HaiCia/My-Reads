@@ -10,7 +10,6 @@ class BooksSearch extends React.Component {
   state = {
     query: '',
     results: [],
-    errorMessage: false,
     searchMessage: false
   }
 
@@ -33,13 +32,13 @@ class BooksSearch extends React.Component {
           console.log(query)
         })
       } else {
-        this.setState({ results:[], searchMessage: false})
+        this.setState({ query: '', results:[], searchMessage: false})
       }
     }
 
   render() {
 
-    const { results, searchMessage, errorMessage } = this.state
+    const { results, searchMessage } = this.state
 
     results.sort(sortBy('name'))
 
@@ -56,9 +55,6 @@ class BooksSearch extends React.Component {
                   }/>
           {searchMessage === true && (
             <span>We found {results.length} books for You!</span>
-          )}
-          {errorMessage === true && (
-            <span>Something went wrong. Please try again</span>
           )}
 
         </div>

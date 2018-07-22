@@ -1,3 +1,5 @@
+// I have used updateQuery function from udacity webinar walktrough
+
 import React from 'react'
 import BooksSearch from './BooksSearch'
 import BooksShelves from './BooksShelves'
@@ -36,7 +38,6 @@ class BooksApp extends React.Component {
     const { booksArr } = this.state
 
     return (
-
       <div className="app">
         <Route exact path='/search' render={() => (
           <BooksSearch shelf="none" shelfChanger={this.shelfChanger} booksArr={booksArr} />
