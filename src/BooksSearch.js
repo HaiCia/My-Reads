@@ -17,6 +17,7 @@ class BooksSearch extends React.Component {
     this.setState({query: query})
     let results = []
       if(query) {
+      console.log('query: ' + query);
         BooksAPI.search(query)
           .then((data) =>  { if(data.length > 0) {
             results = data.map(book => {
@@ -27,12 +28,15 @@ class BooksSearch extends React.Component {
                 return book
               }
             })
-          } 
-          this.setState({ results: results, searchMessage: true})
+          }
+          if (this.state.query)
+            this.setState({ results: results, searchMessage: true})
+
           console.log(query)
         })
       } else {
-        this.setState({ query: '', results:[], searchMessage: false})
+      console.log('no query');
+         this.setState({ query: '', results:[], searchMessage: false})        
       }
     }
 
